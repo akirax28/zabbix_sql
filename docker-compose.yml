@@ -19,7 +19,7 @@ services:
         limits:
           memory: 1G
           cpus: '0.50'
- 
+ #####
   zabbix_server:
     image: zabbix/zabbix-server-pgsql
     depends_on:
@@ -41,8 +41,8 @@ services:
     ports:
       - "10051:10051"
     links:
-      - zabbix_agente:zabbix_agente      
-      
+      - zabbix_agente:zabbix_agente
+
   zabbix_agente:
     privileged: true
     network_mode: host
@@ -63,7 +63,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /:/rootfs
-      - /var/run:/var/run      
+      - /var/run:/var/run
     networks:
       - zabbix
     links:
@@ -89,7 +89,7 @@ services:
           memory: 512M
     networks:
       - zabbix
-      
+
   grafana:
     image: grafana/grafana:latest
     ports:
@@ -101,7 +101,7 @@ services:
         limits:
           cpus: '0.50'
           memory: 128M
-          
+
    pgbackups:
      image: prodrigestivill/postgres-backup-local
        restart: always
@@ -123,7 +123,7 @@ services:
           - BACKUP_KEEP_WEEKS=4
           - BACKUP_KEEP_MONTHS=6
           - HEALTHCHECK_PORT=80
-          
+
 volumes:
   zabbix_db:
   backups:
