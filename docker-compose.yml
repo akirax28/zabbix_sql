@@ -102,27 +102,27 @@ services:
           cpus: '0.50'
           memory: 128M
 
-   pgbackups:
-     image: prodrigestivill/postgres-backup-local
-       restart: always
-       volumes:
-         - backups:/backups
-       links:
-         - postgres
-       depends_on:
-          - postgres
-       environment:
-          - POSTGRES_HOST=postgres
-          - POSTGRES_DB=zabbix
-          - POSTGRES_USER=zabbix
-          - POSTGRES_PASSWORD=zabbix
-       #  - POSTGRES_PASSWORD_FILE=/run/secrets/db_password <-- alternative for POSTGRES_PASSWORD (to use with docker secrets)
-          - POSTGRES_EXTRA_OPTS=-Z9 --schema=public --blobs
-          - SCHEDULE=@daily
-          - BACKUP_KEEP_DAYS=7
-          - BACKUP_KEEP_WEEKS=4
-          - BACKUP_KEEP_MONTHS=6
-          - HEALTHCHECK_PORT=80
+  pgbackups:
+    image: prodrigestivill/postgres-backup-local
+    restart: always
+    volumes:
+      - backups:/backups
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=zabbix
+      - POSTGRES_USER=zabbix
+      - POSTGRES_PASSWORD=zabbix
+      #  - POSTGRES_PASSWORD_FILE=/run/secrets/db_password <-- alternative for POSTGRES_PASSWORD (to use with docker secrets)
+      - POSTGRES_EXTRA_OPTS=-Z9 --schema=public --blobs
+      - SCHEDULE=@daily
+      - BACKUP_KEEP_DAYS=7
+      - BACKUP_KEEP_WEEKS=4
+      - BACKUP_KEEP_MONTHS=6
+      - HEALTHCHECK_PORT=80
 
 volumes:
   zabbix_db:
