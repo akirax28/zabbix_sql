@@ -19,7 +19,7 @@ services:
         limits:
           memory: 1G
           cpus: '0.50'
- #####
+
   zabbix_server:
     image: zabbix/zabbix-server-pgsql
     depends_on:
@@ -113,9 +113,9 @@ services:
           - postgres
        environment:
           - POSTGRES_HOST=postgres
-          - POSTGRES_DB=database
-          - POSTGRES_USER=username
-          - POSTGRES_PASSWORD=password
+          - POSTGRES_DB=zabbix
+          - POSTGRES_USER=zabbix
+          - POSTGRES_PASSWORD=zabbix
        #  - POSTGRES_PASSWORD_FILE=/run/secrets/db_password <-- alternative for POSTGRES_PASSWORD (to use with docker secrets)
           - POSTGRES_EXTRA_OPTS=-Z9 --schema=public --blobs
           - SCHEDULE=@daily
