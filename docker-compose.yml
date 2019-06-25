@@ -41,7 +41,7 @@ services:
     ports:
       - "10051:10051"
     links:
-      - zabbix_agente:zabbix_agente
+      - zabbix_agente:agente
 
   zabbix_agente:
     privileged: true
@@ -123,8 +123,8 @@ services:
       - BACKUP_KEEP_WEEKS=4
       - BACKUP_KEEP_MONTHS=6
       - HEALTHCHECK_PORT=80
-    ports:
-      - "9001:80"      
+    networks:
+      - zabbix
 
 volumes:
   zabbix_db:
